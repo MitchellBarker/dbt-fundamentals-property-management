@@ -1,0 +1,72 @@
+version: 2
+
+sources:
+  - name: property_management
+    description: A basic property managagment situation
+    database: raw
+    schema: Property_management
+    tables:
+      - name: properties
+        description: Raw property data
+        freshness:
+          warn_after:
+            count: 1
+            period: day
+          error_after:
+            count: 2
+            period: day
+        loaded_at_field: uploaded_at
+        columns:
+          - name: id
+            description: primary key (I assume)
+            tests:
+              - unique
+              - not_null
+      - name: leases
+        description: Raw lease data
+        freshness:
+          warn_after:
+            count: 1
+            period: day
+          error_after:
+            count: 2
+            period: day
+        loaded_at_field: uploaded_at
+        columns:
+          - name: id
+            description: primary key (I assume)
+            tests:
+              - unique
+              - not_null
+      - name: units
+        description: Raw unit data
+        freshness:
+          warn_after:
+            count: 1
+            period: day
+          error_after:
+            count: 2
+            period: day
+        loaded_at_field: uploaded_at
+        columns:
+          - name: id
+            description: primary key (I assume)
+            tests:
+              - unique
+              - not_null
+      - name: rental_applications
+        description: Raw rental application data
+        freshness:
+          warn_after:
+            count: 1
+            period: day
+          error_after:
+            count: 2
+            period: day
+        loaded_at_field: uploaded_at
+        columns:
+          - name: id
+            description: primary key (I assume)
+            tests:
+              - unique
+              - not_null
