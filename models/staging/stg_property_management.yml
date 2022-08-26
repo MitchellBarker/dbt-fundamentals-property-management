@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_leases
+    description: formatted leases table
+    columns:
+      - name: unit_id
+        tests:
+          - relationships:
+              to: ref('stg_units')
+              field: unit_id
+      - name: rental_application_id
+        tests:
+          - relationships:
+              to: ref('stg_rental_applications')
+              field: rental_application_id
+  - name: stg_properties
+    description: formatted properties table
+    columns:
+      - name: type
+        tests:
+          - accepted_values:
+              values: ['commercial', 'homeowners_association', 'multi_family_residence', 'single_family_residence']
+  - name: stg_rental_applications
+    description: formatted rental applications table
+    columns:
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['denied', 'approved', 'converted_to_tenant']
+  - name: stg_units
+    description: formatted units table
+    columns:
+      - name: status
+        description: "{{ doc('units_status') }}"
+        tests:
+          - accepted_values:
+              values: ['occupied', 'rented', 'construction', 'vacant']
+      - name: property_id
+        tests:
+          - relationships:
+              to: ref('stg_properties')
+              field: property_id
